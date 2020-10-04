@@ -9,7 +9,7 @@ module.exports = {
     },
     view: function (vnode) {
         if (Bets.list) {
-            return m('', m('#right', 'bets', Bets.list.map((bet) => {
+            return m('', m('', 'bets', Bets.list.map((bet) => {
                 return m(Bet, { daysAvailable: vnode.attrs.daysAvailable, bet: bet, selectedPeople: vnode.attrs.selectedPeople })
             })))
         } else {

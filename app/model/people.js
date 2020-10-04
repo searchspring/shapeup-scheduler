@@ -8,7 +8,7 @@ const People = {
             { name: 'bobby', daysAvailable: 30 },
             { name: 'marcus', daysAvailable: 30 },
             { name: 'steve', daysAvailable: 30 },
-            { name: 'akil', daysAvailable: 30 }
+            { name: 'Akil Darjean', daysAvailable: 30 }
         ]
     },
     selectPerson: (person) => {
@@ -35,12 +35,11 @@ const People = {
             People.list = []
             values.map((row) => {
                 if (row[1].toLowerCase() === 'engineering' && row[0] !== 'Nebo' && row[0] !== 'Will Warren') {
-                    People.list.push({ name: row[0], daysAvailable: 30, manager: row[3] })
-                    console.log(row)
+                    People.list.push({ name: row[0], daysAvailable: 30, manager: row[3] , location: row[6] })
                 }
             })
             People.list = People.list.sort((a, b)=>{
-                return a.manager.localeCompare(b.manager)
+                return a.location.localeCompare(b.location)
             })
             m.redraw()
         }).catch((err) => {

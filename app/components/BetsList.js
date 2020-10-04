@@ -9,11 +9,19 @@ module.exports = {
     },
     view: function (vnode) {
         if (Bets.list) {
-            return m('', m('', 'bets', Bets.list.map((bet) => {
-                return m(Bet, { daysAvailable: vnode.attrs.daysAvailable, bet: bet, selectedPeople: vnode.attrs.selectedPeople })
-            })))
-        } else {
-            return m('', 'loading')
+            let betList = Bets.list.map((bet) => {
+                return m(Bet, { daysAvailable: vnode.attrs.daysAvailable, bet: bet })
+            })
+            return m('', m('', [
+                m('.flex', [
+                    m('.flex-1', 'bets'),
+                    m('.flex-1.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
+                        onclick: () => {
+                            Bets.sync()
+                        }
+                    }, 'sync')
+                ]), betList
+            ]))
         }
     }
 }

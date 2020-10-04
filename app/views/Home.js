@@ -20,7 +20,7 @@ module.exports = {
             return m(Layout,
                 m('.flex.m-2', [
                     m('.w-1/4.mr-2', m(PeopleList, { daysAvailable: Bets.calculateDaysAvailable(daysAvailable) })),
-                    m('.flex-grow', m(BetsList, { daysAvailable: daysAvailable }))
+                    m('.w-3/4', m(BetsList, { daysAvailable: daysAvailable }))
                 ])
             )
         }

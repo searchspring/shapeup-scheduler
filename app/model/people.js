@@ -1,6 +1,6 @@
 const m = require('mithril')
 const jsonstore = require('../utils/jsonstore')
-
+const SHEET_ID= '1lagMGiB21B3CmVytMQkj3jeYa7hl0gQv4WwUAX7_9GA'
 const People = {
     list: [],
     selected: [],
@@ -21,7 +21,7 @@ const People = {
         People.save()
     },
     sync: () => {
-        let sheetId = ORG_CHART_SHEET_ID
+        let sheetId = SHEET_ID
         if (!sheetId || sheetId === '') {
             alert('must set a sheet ID')
             return
@@ -35,11 +35,18 @@ const People = {
             let values = response.result.values
             People.list = []
             values.map((row) => {
-                if (row[1].toLowerCase() === 'engineering' && row[0] !== 'Nebo' && row[0] !== 'Will Warren') {
-                    People.list.push({ name: row[0], daysAvailable: 30, manager: row[3], location: row[6] })
+                if (row[0] !== 'Nebo' && row[0] !== 'Will Warren') {
+                    let available = 30
+                    if (row[3]) {
+                        available = 30 - parseInt(row[3])
+                    }
+                    People.list.push({ name: row[0], daysAvailable: available, manager: row[1], team: row[2] })
                 }
             })
             People.list = People.list.sort((a, b) => {
+                if (a.team !== b.team) {
+                    return a.team.localeCompare(b.team)
+                }
                 return a.name.localeCompare(b.name)
             })
             People.save()

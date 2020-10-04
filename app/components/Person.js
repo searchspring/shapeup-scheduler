@@ -30,10 +30,10 @@ module.exports = {
             },
                 m(`.shadow.w-full.bg-gray-300.rounded-full`,
                     m(`.${bg}.text-xs.leading-none.px-2.py-1.rounded-full`,
-                        { style: { width: w + '%' } }, person.name + ` (${personDaysAvailable})` 
+                        { style: { width: w + '%' } }, person.team + ': ' + person.name + ` (${personDaysAvailable})` 
                     )))
         } else {
-            return m('', 'on person set')
+            return m('', 'no person set')
         }
     }
 }

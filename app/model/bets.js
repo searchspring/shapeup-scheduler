@@ -58,7 +58,7 @@ const Bets = {
                 'opt_fields': taskFields
             }
         }).then((response) => {
-            Bets.list = []
+            let newList = []
             let teams = {}
             console.log(response.data[0]);
             response.data.map((task) => {
@@ -75,7 +75,9 @@ const Bets = {
                             team = 'not set'
                         } else {
                             team = custom.enum_value.name
-                            teams[team] = true
+                            if (team.toLowerCase() !== 'devops') {
+                                teams[team] = true
+                            }
                         }
                     }
                 })
@@ -88,7 +90,7 @@ const Bets = {
                     }
                 })
                 if (inBetTable) {
-                    Bets.list.push({
+                    newList.push({
                         name: task.name,
                         team: team,
                         daysRequired: size,
@@ -96,12 +98,12 @@ const Bets = {
                     })
                 }
             })
-            Bets.list.sort((a, b) => {
+            newList.sort((a, b) => {
                 let aSort = a.team.toLowerCase() + a.name.toLowerCase()
                 let bSort = b.team.toLowerCase() + b.name.toLowerCase()
                 return aSort.localeCompare(bSort)
             })
-            Bets.list.push({
+            newList.push({
                 name: '',
                 team: '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::',
                 daysRequired: 30,
@@ -109,7 +111,7 @@ const Bets = {
             })
             for (let t in teams) {
                 for (let i = 0; i < 6; i++) {
-                    Bets.list.push({
+                    newList.push({
                         name: "Bug Hero",
                         team: t,
                         daysRequired: 5,
@@ -117,6 +119,8 @@ const Bets = {
                     })
                 }
             }
+            Bets.list = newList
+
             Bets.save()
         })
     }

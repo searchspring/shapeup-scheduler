@@ -40,7 +40,7 @@ const People = {
                 }
             })
             People.list = People.list.sort((a, b) => {
-                return a.location.localeCompare(b.location)
+                return a.name.localeCompare(b.name)
             })
             People.save()
             m.redraw()

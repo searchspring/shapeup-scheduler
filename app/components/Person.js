@@ -29,7 +29,7 @@ module.exports = {
                 }
             },
                 m(`.shadow.w-full.bg-gray-300.rounded-full`,
-                    m(`.${bg}.text-xs.leading-none.py-1.text-center.rounded-full`,
+                    m(`.${bg}.text-xs.leading-none.px-2.py-1.rounded-full`,
                         { style: { width: w + '%' } }, person.name + ` (${personDaysAvailable})` 
                     )))
         } else {

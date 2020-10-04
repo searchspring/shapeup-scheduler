@@ -59,6 +59,7 @@ const Bets = {
             }
         }).then((response) => {
             Bets.list = []
+            let teams = {}
             console.log(response.data[0]);
             response.data.map((task) => {
                 let inBetTable = false
@@ -74,6 +75,7 @@ const Bets = {
                             team = 'not set'
                         } else {
                             team = custom.enum_value.name
+                            teams[team] = true
                         }
                     }
                 })
@@ -99,6 +101,22 @@ const Bets = {
                 let bSort = b.team.toLowerCase() + b.name.toLowerCase()
                 return aSort.localeCompare(bSort)
             })
+            Bets.list.push({
+                name: '',
+                team: '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::',
+                daysRequired: 30,
+                people: []
+            })
+            for (let t in teams) {
+                for (let i = 0; i < 6; i++) {
+                    Bets.list.push({
+                        name: "Bug Hero",
+                        team: t,
+                        daysRequired: 5,
+                        people: []
+                    })
+                }
+            }
             Bets.save()
         })
     }

@@ -6,22 +6,21 @@ module.exports = {
     view: function (vnode) {
         let lastTeam = ''
         let peopleList = People.list.map((person) => {
-            let spacer = null
-            if (lastTeam !== ''  && lastTeam !== person.team) {
-                spacer = m('.mb-4', '')
+            let teamTitle = null
+            if (lastTeam !== person.team) {
+                teamTitle = m('.text-sm', person.team)
             }
             lastTeam = person.team
-            return [spacer, m(Person, { person: person, daysAvailable: vnode.attrs.daysAvailable })]
+            return [teamTitle, m(Person, { person: person, daysAvailable: vnode.attrs.daysAvailable })]
         })
-        return m('', m('', [
-            m('.flex', [
-                m('.flex-1', 'people'),
-                m('.flex-1.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
+        return m('', [
+                m('.flex-1.float-right.text-xs.text-blue-500.underline.cursor-pointer', {
                     onclick:()=>{
                         People.sync()
                     }
-                },'sync')
-            ]), peopleList
-        ]))
+                },'sync'),
+                peopleList
+        ])
+        
     }
 }

@@ -19,13 +19,13 @@ module.exports = {
             }))
             let w = parseInt(bet.daysRequired / 30 * 100)
 
-            return m('.inline-block.mb-1', { style: { width: w + '%' } },
+            return m('.inline-block.mb-1.mr-1.align-top', { style: { width: w + '%' } },
                 m('.w-full.border-solid.border-2.rounded-lg.p-1', [
                     m('', {
                         onclick: () => {
                             Bets.addSelected(People.selected, bet)
                         }
-                    }, m('.hover:bg-red-200.cursor-pointer.text-sm', bet.team + ': ' + bet.name)),
+                    }, m('.hover:bg-red-200.cursor-pointer.text-xs', bet.team + ': ' + bet.name)),
                     peopleBar
                 ]))
         } else {

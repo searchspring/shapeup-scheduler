@@ -60,7 +60,6 @@ const Bets = {
         }).then((response) => {
             let newList = []
             let teams = {}
-            console.log(response.data[0]);
             response.data.map((task) => {
                 let inBetTable = false
                 task.memberships.map((member) => {
@@ -92,6 +91,7 @@ const Bets = {
                 if (inBetTable) {
                     newList.push({
                         name: task.name,
+                        id: task.gid,
                         team: team,
                         daysRequired: size,
                         people: []
@@ -105,24 +105,40 @@ const Bets = {
             })
             newList.push({
                 name: '',
-                team: '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::',
+                team: 'BUG HERO',
                 daysRequired: 30,
                 people: []
             })
+            
             for (let t in teams) {
                 for (let i = 0; i < 6; i++) {
                     newList.push({
-                        name: "Bug Hero",
+                        name: 'Bug Hero',
                         team: t,
+                        id: 'bug hero' + t + i,
                         daysRequired: 5,
                         people: []
                     })
                 }
             }
-            Bets.list = newList
+            
+            Bets.list = Bets.copyOverPeople(newList)
 
             Bets.save()
         })
+    },
+    copyOverPeople: (newList) => {
+        newList.map((newBet)=>{
+            let oldBet = Bets.list.find((old)=>{
+                if (old.id === newBet.id) {
+                    return old
+                }
+            })
+            if (oldBet) {
+                newBet.people = oldBet.people
+            }
+        })
+        return newList
     }
 }
 module.exports = Bets

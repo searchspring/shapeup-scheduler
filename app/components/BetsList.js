@@ -14,7 +14,7 @@ module.exports = {
             })
             return m('', m('', [
                 m('.flex', [
-                    m('.flex-1', 'bets'),
+                    m('.flex-1', 'Bets'),
                     m('.flex-1.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
                         onclick: () => {
                             Bets.sync()

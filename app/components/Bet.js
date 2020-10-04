@@ -20,8 +20,8 @@ module.exports = {
             }))
             let w = parseInt(bet.daysRequired / 30 * 100)
 
-            return m('.mb-3', { style: { width: w + '%' } },
-                m('.w-full.bg-grey-light', [
+            return m('.mb-1', { style: { width: w + '%' } },
+                m('.w-full.border-solid.border-2.rounded-lg.p-1', [
                     m('', {
                         onclick: () => {
                             People.selected.map((name)=>{

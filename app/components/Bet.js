@@ -1,4 +1,5 @@
 const m = require('mithril')
+const Bets = require('../model/bets')
 const People = require('../model/people')
 const { Remove } = require('../utils/icons')
 module.exports = {
@@ -10,9 +11,7 @@ module.exports = {
                     m('.flex', [
                         m('.flex-grow', {
                             onclick: () => {
-                                bet.people = bet.people.filter((tofilter) => {
-                                    return tofilter !== name
-                                })
+                                Bets.removePerson(name, bet)
                             }
                         }, name)
                     ])
@@ -24,9 +23,7 @@ module.exports = {
                 m('.w-full.border-solid.border-2.rounded-lg.p-1', [
                     m('', {
                         onclick: () => {
-                            People.selected.map((name)=>{
-                                bet.people.push(name)
-                            })
+                            Bets.addSelected(People.selected, bet)
                         }
                     }, m('.hover:bg-red-200.cursor-pointer.text-sm', bet.team + ': ' + bet.name)),
                     peopleBar

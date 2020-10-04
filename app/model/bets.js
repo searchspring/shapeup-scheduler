@@ -1,14 +1,25 @@
 const m = require('mithril')
+const jsonstore = require('../utils/jsonstore')
+
 const Bets = {
     list: [],
     loadList() {
-        this.list = [
-            { name: 'ab testing', daysRequired: 30, people: ['bobby'], team: 'vortex' },
-            { name: 'merchandising', daysRequired: 10, people: ['steve'], team: 'not set' },
-            { name: 'reporting', daysRequired: 10, people: ['aaron'], team: 'not set' },
-            { name: 'reporting', daysRequired: 10, people: ['aaron', 'bobby'], team: 'not set' },
-            { name: 'remove sql', daysRequired: 30, people: ['Akil Darjean'], team: 'not set' }
-        ]
+        Bets.list = jsonstore.get('bets.list', [])
+    },
+    save: () => {
+        jsonstore.set('bets.list', Bets.list)
+    },
+    addSelected: (selected, bet) => {
+        selected.map((name) => {
+            bet.people.push(name)
+        })
+        Bets.save()
+    },
+    removePerson: (name, bet) => {
+        bet.people = bet.people.filter((tofilter) => {
+            return tofilter !== name
+        })
+        Bets.save()
     },
     calculateDaysAvailable: (daysAvailable) => {
         if (!Bets.list) {
@@ -78,16 +89,17 @@ const Bets = {
                     Bets.list.push({
                         name: task.name,
                         team: team,
-                        daysRequired: size, 
+                        daysRequired: size,
                         people: []
                     })
                 }
             })
-            Bets.list.sort((a, b)=>{
+            Bets.list.sort((a, b) => {
                 let aSort = a.team.toLowerCase() + a.name.toLowerCase()
                 let bSort = b.team.toLowerCase() + b.name.toLowerCase()
                 return aSort.localeCompare(bSort)
             })
+            Bets.save()
         })
     }
 }

@@ -19,7 +19,7 @@ module.exports = {
             }))
             let w = parseInt(bet.daysRequired / 30 * 100)
 
-            return m('.inline-block.mb-1.mr-1.align-top', { style: { width: w + '%' } },
+            return m('.inline-block.mb-1.align-top', { style: { width: w + '%' } },
                 m('.w-full.border-solid.border-2.rounded-lg.p-1', [
                     m('', {
                         onclick: () => {

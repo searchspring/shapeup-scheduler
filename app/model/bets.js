@@ -99,8 +99,8 @@ const Bets = {
                 }
             })
             newList.sort((a, b) => {
-                let aSort = a.team.toLowerCase() + a.name.toLowerCase()
-                let bSort = b.team.toLowerCase() + b.name.toLowerCase()
+                let aSort = a.team.toLowerCase() + (a.daysRequired === 30 ? '': 'Z') + a.name.toLowerCase()
+                let bSort = b.team.toLowerCase() + (b.daysRequired === 30 ? '': 'Z') + b.name.toLowerCase()
                 return aSort.localeCompare(bSort)
             })
             newList.push({

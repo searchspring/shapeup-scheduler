@@ -15,11 +15,16 @@ module.exports = {
             return m('', m('', [
                 m('.flex', [
                     m('.flex-1', 'Bets'),
-                    m('.flex-1.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
+                    m('.mr-4.flex-grow.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
+                        onclick: () => {
+                            Bets.setAsanaToken()
+                        }
+                    }, 'set asana access token'),
+                    m('.flex-initial.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
                         onclick: () => {
                             Bets.sync()
                         }
-                    }, 'sync')
+                    }, 'sync bets')
                 ]), betList
             ]))
         }

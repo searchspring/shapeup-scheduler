@@ -38,11 +38,15 @@ const Bets = {
         })
         return afterBet
     },
+    setAsanaToken: () => {
+        let pat = prompt('please enter asana access token')
+        localStorage.setItem('pat', pat)
+    },
     sync: () => {
         let pat = localStorage.getItem('pat')
-        if (!pat) {
-            pat = prompt('please enter asana access token')
-            localStorage.setItem('pat', pat)
+        if (!pat || pat === null || pat === 'null') {
+            alert('you must set asana personal access token')
+            return
         }
         let projectId = '1149610717173685'
         let taskFields = 'custom_fields,tags.name,tags.color,memberships.section.name,memberships.project.name,name,assignee.photo,assignee.name,assignee.email,due_on,modified_at,html_notes,notes,stories'
@@ -99,8 +103,8 @@ const Bets = {
                 }
             })
             newList.sort((a, b) => {
-                let aSort = a.team.toLowerCase() + (a.daysRequired === 30 ? '': 'Z') + a.name.toLowerCase()
-                let bSort = b.team.toLowerCase() + (b.daysRequired === 30 ? '': 'Z') + b.name.toLowerCase()
+                let aSort = a.team.toLowerCase() + (a.daysRequired === 30 ? '' : 'Z') + a.name.toLowerCase()
+                let bSort = b.team.toLowerCase() + (b.daysRequired === 30 ? '' : 'Z') + b.name.toLowerCase()
                 return aSort.localeCompare(bSort)
             })
             newList.push({
@@ -109,7 +113,7 @@ const Bets = {
                 daysRequired: 30,
                 people: []
             })
-            
+
             for (let t in teams) {
                 for (let i = 0; i < 6; i++) {
                     newList.push({
@@ -121,15 +125,15 @@ const Bets = {
                     })
                 }
             }
-            
+
             Bets.list = Bets.copyOverPeople(newList)
 
             Bets.save()
         })
     },
     copyOverPeople: (newList) => {
-        newList.map((newBet)=>{
-            let oldBet = Bets.list.find((old)=>{
+        newList.map((newBet) => {
+            let oldBet = Bets.list.find((old) => {
                 if (old.id === newBet.id) {
                     return old
                 }

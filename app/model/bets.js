@@ -40,9 +40,11 @@ const Bets = {
     },
     setAsanaToken: () => {
         let pat = prompt('please enter asana access token')
-        localStorage.setItem('pat', pat)
+        if (pat) {
+            localStorage.setItem('pat', pat)
+        }
     },
-    sync: () => {
+    sync: (cb) => {
         let pat = localStorage.getItem('pat')
         if (!pat || pat === null || pat === 'null') {
             alert('you must set asana personal access token')
@@ -127,8 +129,11 @@ const Bets = {
             }
 
             Bets.list = Bets.copyOverPeople(newList)
-
             Bets.save()
+            cb()
+        }).catch((e)=>{
+            alert(JSON.stringify(e))
+            cb()
         })
     },
     copyOverPeople: (newList) => {

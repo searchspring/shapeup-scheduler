@@ -1,9 +1,11 @@
 const m = require('mithril')
+const { spinner } = require('../css')
 const Bets = require("../model/bets")
 const People = require('../model/people')
 const Bet = require('./Bet')
 
 module.exports = {
+    loading: false,
     oninit: function () {
         Bets.loadList()
     },
@@ -22,9 +24,12 @@ module.exports = {
                     }, 'set asana access token'),
                     m('.flex-initial.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
                         onclick: () => {
-                            Bets.sync()
+                            vnode.state.loading = true
+                            Bets.sync(()=>{
+                                vnode.state.loading = false
+                            })
                         }
-                    }, 'sync bets')
+                    }, [vnode.state.loading ? spinner({class: 'mr-2'}) : null, 'sync bets'])
                 ]), betList
             ]))
         }

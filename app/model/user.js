@@ -15,6 +15,8 @@ const User = {
             }).then(function () {
                 gapi.auth2.getAuthInstance().isSignedIn.listen(User.updateSignInStatus);
                 User.updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            }).catch((e)=>{
+                alert(JSON.stringify(e))
             })
         });
     },

@@ -1,6 +1,6 @@
 const m = require('mithril')
 const jsonstore = require('../utils/jsonstore')
-const SHEET_ID= '1lagMGiB21B3CmVytMQkj3jeYa7hl0gQv4WwUAX7_9GA'
+const SHEET_ID = '1lagMGiB21B3CmVytMQkj3jeYa7hl0gQv4WwUAX7_9GA'
 const People = {
     list: [],
     selected: [],
@@ -20,7 +20,7 @@ const People = {
         })
         People.save()
     },
-    sync: () => {
+    sync: (cb) => {
         let sheetId = SHEET_ID
         if (!sheetId || sheetId === '') {
             alert('must set a sheet ID')
@@ -51,9 +51,11 @@ const People = {
             })
             People.save()
             m.redraw()
-        }).catch((err) => {
-            console.error('error', err)
-        });
+            cb()
+        }).catch((e) => {
+            alert(JSON.stringify(e))
+            cb()
+        })
     }
 }
 module.exports = People

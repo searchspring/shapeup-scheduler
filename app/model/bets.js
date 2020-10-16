@@ -69,7 +69,7 @@ const Bets = {
             response.data.map((task) => {
                 let inBetTable = false
                 task.memberships.map((member) => {
-                    if (member.section.name === 'Bet Table' || member.section.name === 'Shaping') {
+                    if (member.section.name === 'Bet Table') {
                         inBetTable = true
                     }
                 })

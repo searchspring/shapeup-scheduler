@@ -90,7 +90,8 @@ const Bets = {
                 task.custom_fields.map((custom) => {
                     if (custom && custom.name.toLowerCase() === 'bet size') {
                         if (custom.enum_value) {
-                            size = custom.enum_value.name.toLowerCase() === 'large' ? 30 : 10
+                            let sizeName = custom.enum_value.name.toLowerCase()
+                            size = sizeName === 'large' ? 30 : sizeName === 'medium' ? 20: 10
                         }
                     }
                 })
@@ -105,8 +106,8 @@ const Bets = {
                 }
             })
             newList.sort((a, b) => {
-                let aSort = a.team.toLowerCase() + (a.daysRequired === 30 ? '' : 'Z') + a.name.toLowerCase()
-                let bSort = b.team.toLowerCase() + (b.daysRequired === 30 ? '' : 'Z') + b.name.toLowerCase()
+                let aSort = a.team.toLowerCase() + (b.daysRequired + '') + a.name.toLowerCase()
+                let bSort = b.team.toLowerCase() + (a.daysRequired + '') + b.name.toLowerCase()
                 return aSort.localeCompare(bSort)
             })
             newList.push({
@@ -131,7 +132,7 @@ const Bets = {
             Bets.list = Bets.copyOverPeople(newList)
             Bets.save()
             cb()
-        }).catch((e)=>{
+        }).catch((e) => {
             alert(JSON.stringify(e))
             cb()
         })

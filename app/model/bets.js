@@ -105,11 +105,8 @@ const Bets = {
                     })
                 }
             })
-            newList.sort((a, b) => {
-                let aSort = a.team.toLowerCase() + (b.daysRequired + '') + a.name.toLowerCase()
-                let bSort = b.team.toLowerCase() + (a.daysRequired + '') + b.name.toLowerCase()
-                return aSort.localeCompare(bSort)
-            })
+            
+            // separator 
             newList.push({
                 name: '',
                 team: 'BUG HERO',

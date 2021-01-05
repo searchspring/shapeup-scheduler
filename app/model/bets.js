@@ -56,7 +56,7 @@ const Bets = {
             method: 'GET',
             url: `https://app.asana.com/api/1.0/tasks`,
             headers: {
-                'Authorization': `Bearer ${pat}`
+                'Authoriztion': `Bearer ${pat}`
             },
             params: {
                 'completed_since': new Date().toISOString(),
@@ -91,7 +91,7 @@ const Bets = {
                     if (custom && custom.name.toLowerCase() === 'bet size') {
                         if (custom.enum_value) {
                             let sizeName = custom.enum_value.name.toLowerCase()
-                            size = sizeName === 'large' ? 30 : sizeName === 'medium' ? 20: 10
+                            size = sizeName === 'large' ? 30 : sizeName === 'medium' ? 20 : 10
                         }
                     }
                 })
@@ -105,7 +105,11 @@ const Bets = {
                     })
                 }
             })
-            
+            newList.sort((a, b) => {
+                let aSort = a.team.toLowerCase() + a.name.toLowerCase()
+                let bSort = b.team.toLowerCase() + b.name.toLowerCase()
+                return aSort.localeCompare(bSort)
+            })
             // separator 
             newList.push({
                 name: '',

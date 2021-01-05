@@ -35,7 +35,7 @@ const People = {
             let values = response.result.values
             People.list = []
             values.map((row) => {
-                if (row[0] !== 'Nebo' && row[0] !== 'Will Warren') {
+                if (!ignore(row[0])) {
                     let available = 30
                     if (row[3]) {
                         available = 30 - parseInt(row[3])
@@ -49,6 +49,10 @@ const People = {
                 }
                 return a.name.localeCompare(b.name)
             })
+            // People.list = People.list.filter((p)=>{
+            //     console.log(p)
+            //     return true
+            // })
             People.save()
             m.redraw()
             cb()
@@ -57,5 +61,18 @@ const People = {
             cb()
         })
     }
+}
+
+function ignore(name) {
+    return name === 'Nebo' ||
+        name === 'Will Warren' || 
+        name === 'Chris Pellett'|| 
+        name === 'Zachrey Button'|| 
+        name === 'Eric Hacke'|| 
+        name === 'Scott Schanel'|| 
+        name === 'Michael Longauer'|| 
+        name === 'Łukasz Ostrowski'|| 
+        name === 'Greg Hellings'|| 
+        name === 'Raymond Hou'
 }
 module.exports = People

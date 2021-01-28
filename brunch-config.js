@@ -10,10 +10,16 @@ exports.files = {
 }
 
 exports.plugins = {
-  babel: { presets: ['@babel/env'] },
+  babel: {
+    "pattern": /\.(js|jsx)$/,
+    "presets": ["es2015"],
+    "plugins": [
+      ["transform-react-jsx", { pragma: 'm' }]
+    ]
+  },
   postcss: {
     processors: [
       require('tailwindcss')
     ]
-  },
+  }
 }

@@ -2,6 +2,9 @@ const m = require('mithril')
 const Bets = require('../model/bets')
 const People = require('../model/people')
 const { Remove } = require('../utils/icons')
+function firstName(name){
+    return name.substring(0, name.indexOf(' '))
+}
 module.exports = {
     view: (vnode) => {
         let bet = vnode.attrs.bet
@@ -13,7 +16,7 @@ module.exports = {
                             onclick: () => {
                                 Bets.removePerson(name, bet)
                             }
-                        }, name)
+                        }, firstName(name))
                     ])
                 )
             }))

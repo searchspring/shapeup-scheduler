@@ -1,6 +1,6 @@
 const m = require('mithril')
 const jsonstore = require('../utils/jsonstore')
-const SHEET_ID = '1lagMGiB21B3CmVytMQkj3jeYa7hl0gQv4WwUAX7_9GA'
+const Setup = require('./setup')
 const People = {
     list: [],
     selected: [],
@@ -21,7 +21,7 @@ const People = {
         People.save()
     },
     sync: (cb) => {
-        let sheetId = SHEET_ID
+        let sheetId = Setup.getUserSheetId()
         if (!sheetId || sheetId === '') {
             alert('must set a sheet ID')
             return
@@ -38,9 +38,9 @@ const People = {
                 if (!ignore(row[0])) {
                     let available = 30
                     if (row[3]) {
-                        available = 30 - parseInt(row[3])
+                        available = 30 - parseInt(row[2])
                     }
-                    People.list.push({ name: row[0], daysAvailable: available, manager: row[1], team: row[2] })
+                    People.list.push({ name: row[0], daysAvailable: available, team: row[1] })
                 }
             })
             People.list = People.list.sort((a, b) => {
@@ -49,10 +49,6 @@ const People = {
                 }
                 return a.name.localeCompare(b.name)
             })
-            // People.list = People.list.filter((p)=>{
-            //     console.log(p)
-            //     return true
-            // })
             People.save()
             m.redraw()
             cb()

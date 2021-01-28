@@ -1,9 +1,29 @@
 require("@babel/polyfill")
 const m = require('mithril')
+const jsonstore = require("./utils/jsonstore")
+
 const Home = require('./views/Home')
+const Setup = require('./views/Setup')
+const setup = require('./model/setup')
+
+const Auth = (view) => {
+  return {
+    onmatch() {
+      if (!setup.isSetup()) {
+        m.route.set('/setup')
+      }
+      else {
+        return view
+      }
+    },
+  }
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
   m.route(document.body, '/', {
-    '/': Home,
+    '/': Auth(Home),
+    '/setup': Setup
   })
-})
+});
+

@@ -2,12 +2,13 @@ const m = require('mithril')
 const { spinner } = require('../css')
 const Bets = require("../model/bets")
 const People = require('../model/people')
+const user = require('../model/user')
 const Bet = require('./Bet')
 
 module.exports = {
     loading: false,
     oninit: function () {
-        Bets.loadList()
+        user.signIn()
     },
     view: function (vnode) {
         if (Bets.list) {
@@ -17,19 +18,15 @@ module.exports = {
             return m('', m('', [
                 m('.flex', [
                     m('.flex-1', 'Bets'),
-                    m('.mr-4.flex-grow.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
-                        onclick: () => {
-                            Bets.setAsanaToken()
-                        }
-                    }, 'set asana access token'),
                     m('.flex-initial.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
                         onclick: () => {
                             vnode.state.loading = true
                             Bets.sync(()=>{
                                 vnode.state.loading = false
+                                m.redraw()
                             })
                         }
-                    }, [vnode.state.loading ? spinner({class: 'mr-2'}) : null, 'sync bets'])
+                    }, user.token ? [vnode.state.loading ? spinner({class: 'mr-2'}) : null, 'sync bets']:'')
                 ]), betList
             ]))
         }

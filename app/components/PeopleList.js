@@ -25,6 +25,7 @@ module.exports = {
                     vnode.state.loading = true
                     People.sync(() => {
                         vnode.state.loading = false
+                        m.redraw()
                     })
                 }
             }, user.token ? [vnode.state.loading ? spinner({class: 'mr-2'}) : null, `sync users`] : ''),

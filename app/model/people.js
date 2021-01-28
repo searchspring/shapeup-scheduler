@@ -20,6 +20,9 @@ const People = {
         })
         People.save()
     },
+    hasSelectedPerson() {
+        return People.selected.length > 0 
+    },
     sync: (cb) => {
         let sheetId = Setup.getUserSheetId()
         if (!sheetId || sheetId === '') {
@@ -35,13 +38,7 @@ const People = {
             let values = response.result.values
             People.list = []
             values.map((row) => {
-                if (!ignore(row[0])) {
-                    let available = 30
-                    if (row[3]) {
-                        available = 30 - parseInt(row[2])
-                    }
-                    People.list.push({ name: row[0], daysAvailable: available, team: row[1] })
-                }
+                People.list.push({ name: row[0], daysAvailable: row[2], team: row[1] })
             })
             People.list = People.list.sort((a, b) => {
                 if (a.team !== b.team) {
@@ -50,7 +47,6 @@ const People = {
                 return a.name.localeCompare(b.name)
             })
             People.save()
-            m.redraw()
             cb()
         }).catch((e) => {
             alert(JSON.stringify(e))
@@ -59,16 +55,4 @@ const People = {
     }
 }
 
-function ignore(name) {
-    return name === 'Nebo' ||
-        name === 'Will Warren' || 
-        name === 'Chris Pellett'|| 
-        name === 'Zachrey Button'|| 
-        name === 'Eric Hacke'|| 
-        name === 'Scott Schanel'|| 
-        name === 'Michael Longauer'|| 
-        name === 'Łukasz Ostrowski'|| 
-        name === 'Greg Hellings'|| 
-        name === 'Raymond Hou'
-}
 module.exports = People

@@ -2,9 +2,7 @@ const m = require('mithril')
 const Bets = require('../model/bets')
 const People = require('../model/people')
 const { Remove } = require('../utils/icons')
-function firstName(name){
-    return name.substring(0, name.indexOf(' '))
-}
+
 module.exports = {
     view: (vnode) => {
         let bet = vnode.attrs.bet
@@ -16,7 +14,7 @@ module.exports = {
                             onclick: () => {
                                 Bets.removePerson(name, bet)
                             }
-                        }, firstName(name))
+                        }, name)
                     ])
                 )
             }))
@@ -28,7 +26,7 @@ module.exports = {
                         onclick: () => {
                             Bets.addSelected(People.selected, bet)
                         }
-                    }, m('.hover:bg-red-200.cursor-pointer.text-xs', bet.team + ': ' + bet.name)),
+                    }, m(`${People.hasSelectedPerson() ? '.hover:bg-red-200':''}.cursor-pointer.text-xs`, bet.team + ': ' + bet.name)),
                     peopleBar
                 ]))
         } else {

@@ -1,5 +1,6 @@
 const m = require('mithril')
 const jsonstore = require('../utils/jsonstore')
+const Setup = require('./setup')
 
 const Bets = {
     list: [],
@@ -45,65 +46,35 @@ const Bets = {
         }
     },
     sync: (cb) => {
-        let pat = localStorage.getItem('pat')
-        if (!pat || pat === null || pat === 'null') {
-            alert('you must set asana personal access token')
+
+        let sheetId = Setup.getBetSheetId()
+        if (!sheetId || sheetId === '') {
+            alert('must set a sheet ID')
             return
         }
-        let projectId = '1149610717173685'
-        let taskFields = 'custom_fields,tags.name,tags.color,memberships.section.name,memberships.project.name,name,assignee.photo,assignee.name,assignee.email,due_on,modified_at,html_notes,notes,stories'
-        m.request({
-            method: 'GET',
-            url: `https://app.asana.com/api/1.0/tasks`,
-            headers: {
-                'Authoriztion': `Bearer ${pat}`
-            },
-            params: {
-                'completed_since': new Date().toISOString(),
-                'project': projectId,
-                'opt_fields': taskFields
-            }
-        }).then((response) => {
+        var params = {
+            spreadsheetId: sheetId,
+            range: 'A2:J'
+        };
+
+        gapi.client.sheets.spreadsheets.values.get(params).then(function (response) {
             let newList = []
             let teams = {}
-            response.data.map((task) => {
-                let inBetTable = false
-                task.memberships.map((member) => {
-                    if (member.section.name === 'Bet Table') {
-                        inBetTable = true
-                    }
+            response.result.values.map((task) => {
+                let team = task[2]
+                teams[team] = true
+                let sizeName = task[1].toLowerCase().trim()
+                let name = task[0]
+                let size = sizeName === 'large' ? 30 : sizeName === 'medium' ? 20 : 10
+
+                newList.push({
+                    name: name,
+                    id: name, 
+                    team: team,
+                    daysRequired: size,
+                    people: []
                 })
-                let team = ''
-                task.custom_fields.map((custom) => {
-                    if (custom && custom.name.toLowerCase() === 'team') {
-                        if (!custom.enum_value) {
-                            team = 'not set'
-                        } else {
-                            team = custom.enum_value.name
-                            if (team.toLowerCase() !== 'devops') {
-                                teams[team] = true
-                            }
-                        }
-                    }
-                })
-                let size = 30
-                task.custom_fields.map((custom) => {
-                    if (custom && custom.name.toLowerCase() === 'bet size') {
-                        if (custom.enum_value) {
-                            let sizeName = custom.enum_value.name.toLowerCase()
-                            size = sizeName === 'large' ? 30 : sizeName === 'medium' ? 20 : 10
-                        }
-                    }
-                })
-                if (inBetTable) {
-                    newList.push({
-                        name: task.name,
-                        id: task.gid,
-                        team: team,
-                        daysRequired: size,
-                        people: []
-                    })
-                }
+
             })
             newList.sort((a, b) => {
                 let aSort = a.team.toLowerCase() + a.name.toLowerCase()
@@ -134,7 +105,7 @@ const Bets = {
             Bets.save()
             cb()
         }).catch((e) => {
-            alert(JSON.stringify(e))
+            alert(e, JSON.stringify(e))
             cb()
         })
     },

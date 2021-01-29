@@ -4,7 +4,7 @@ Use it here: https://shapeup-scheduler.searchspring.com
 
 Simple resourcing app that fits the criteria of the ShapeUp Methodology from the folks at Basecamp.  https://basecamp.com/shapeup
 
-This tool runs as a webapp locally and allows you to schedule humans onto bets.  
+This tool runs as a webapp and allows you to schedule humans onto bets.  
 
 There are three types of bet, Small (2 week), Medium (4 week), Large (6 week).  
 

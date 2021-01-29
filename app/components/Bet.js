@@ -30,7 +30,7 @@ module.exports = {
                     peopleBar
                 ]))
         } else {
-            return m('', 'no person set')
+            return <div>no person set</div>
         }
     }
 }

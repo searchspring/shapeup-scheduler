@@ -4,10 +4,10 @@ const User = {
     user: null,
     signIn: () => {
 
-        let clientId = '951450672419-1f057vlvdvspimp5spujh32utcachngm.apps.googleusercontent.com'
+        let clientId = '867758468836-ig764v7kvcmeurps834bvkc9gnm7eaeu.apps.googleusercontent.com'
 
         gapi.load('client:auth2', () => {
-            var SCOPE = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/admin.directory.user.readonly'
+            var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly'
             gapi.client.init({
                 'clientId': clientId,
                 'scope': SCOPE,

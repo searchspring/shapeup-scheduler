@@ -1,29 +1,29 @@
 {
-  "name": "scheduler",
+  "name": "shapeup-scheduler",
   "author": "codeallthethingz",
   "version": "0.0.1",
   "repository": "",
   "scripts": {
     "test": "jest",
-    "start": "brunch watch --server",
+    "start": "brunch watch --server --port 3000",
     "now-build": "brunch build --production"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "auto-reload-brunch": "^2.7.1",
-    "babel-brunch": "^7.0.1",
     "babel-jest": "^26.1.0",
-    "babel-preset-latest": "^6.24.1",
-    "brunch": "^3.0.0",
-    "clean-css-brunch": "^3.0.0",
     "jest": "^26.1.0",
-    "postcss-brunch": "^3.0.0",
+    "@babel/polyfill": "^7.12.1",
+    "auto-reload-brunch": "^2",
+    "babel-brunch": "~6.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-latest": "^6",
+    "brunch": "^2",
+    "clean-css-brunch": "^2",
+    "postcss-brunch": "^2",
     "tailwindcss": "^1.6.0",
-    "uglify-js-brunch": "^2.10.0"
+    "terser-brunch": "^4.0.0"
   },
   "dependencies": {
     "human-time": "0.0.2",
-    "mithril": "^2.0.4"
+    "mithril": "^1.1.6"
   }
 }

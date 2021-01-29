@@ -19,17 +19,21 @@ module.exports = {
             lastTeam = person.team
             return [teamTitle, m(Person, { person: person, daysAvailable: vnode.attrs.daysAvailable })]
         })
-        return m('', [
-            m('.flex-1.float-right.text-xs.text-blue-500.underline.cursor-pointer', {
-                onclick: () => {
-                    vnode.state.loading = true
-                    People.sync(() => {
-                        vnode.state.loading = false
-                    })
-                }
-            }, user.token ? [vnode.state.loading ? spinner({class: 'mr-2'}) : null, `sync users`] : ''),
-            peopleList
-        ])
-
+        return <div>
+            <div class="flex">
+                <div class="flex-1 mb-4">Humans</div>
+                <div class="flex-initial float-right text-xs text-blue-500 underline cursor-pointer"
+                    onclick={() => {
+                        vnode.state.loading = true
+                        People.sync(() => {
+                            vnode.state.loading = false
+                            m.redraw()
+                        })
+                    }}>
+                    {user.token ? [vnode.state.loading ? spinner({ class: 'mr-2' }) : null, `sync users`] : ''}
+                </div>
+            </div>
+            {peopleList}
+        </div>
     }
 }

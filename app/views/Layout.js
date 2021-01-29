@@ -1,8 +1,13 @@
 const m = require('mithril')
+const Header = require('../components/Header')
 
 module.exports = {
     view: function (vnode) {
-        return m('', vnode.children)
+        return <div>
+            <Header />
+            <div class="content">
+            {vnode.children}
+            </div>
+        </div>
     }
 }
-

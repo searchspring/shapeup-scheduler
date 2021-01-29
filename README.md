@@ -1,6 +1,6 @@
 # Resourcing for ShapeUp
 
-Use it here: https://scheduler.searchspring.com
+Use it here: https://shapeup-scheduler.searchspring.com
 
 Simple resourcing app that fits the criteria of the ShapeUp Methodology from the folks at Basecamp.  https://basecamp.com/shapeup
 
@@ -25,7 +25,7 @@ You'll need to define two data sources in the form of Google Sheets.
     ```
 
 ## Setup
-Go to https://scheduler.searchspring.com and the setup process will ask you for your two spreadsheet URLs and then OAuth you in to connect to them and grab the data.
+Go to https://shapeup-scheduler.searchspring.com and the setup process will ask you for your two spreadsheet URLs and then OAuth you in to connect to them and grab the data.
 
 ## Usage
 

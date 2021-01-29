@@ -15,20 +15,22 @@ module.exports = {
             let betList = Bets.list.map((bet) => {
                 return m(Bet, { daysAvailable: vnode.attrs.daysAvailable, bet: bet })
             })
-            return m('', m('', [
-                m('.flex', [
-                    m('.flex-1', 'Bets'),
-                    m('.flex-initial.text-right.text-xs.text-blue-500.underline.cursor-pointer', {
-                        onclick: () => {
+            return <div>
+                <div class="flex">
+                    <div class="flex-1 mb-4">Bets</div>
+                    <div class="flex-initial text-right text-xs text-blue-500 underline cursor-pointer"
+                        onclick={() => {
                             vnode.state.loading = true
-                            Bets.sync(()=>{
+                            Bets.sync(() => {
                                 vnode.state.loading = false
                                 m.redraw()
                             })
-                        }
-                    }, user.token ? [vnode.state.loading ? spinner({class: 'mr-2'}) : null, 'sync bets']:'')
-                ]), betList
-            ]))
+                        }}>
+                        {user.token ? [vnode.state.loading ? spinner({ class: 'mr-2' }) : null, 'sync bets'] : ''}
+                    </div>
+                </div>
+                {betList}
+            </div>
         }
     }
 }

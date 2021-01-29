@@ -5,6 +5,8 @@ const jsonstore = require("./utils/jsonstore")
 const Home = require('./views/Home')
 const Setup = require('./views/Setup')
 const setup = require('./model/setup')
+const Privacy = require("./views/Privacy")
+const Terms = require("./views/Terms")
 
 const Auth = (view) => {
   return {
@@ -23,7 +25,9 @@ const Auth = (view) => {
 document.addEventListener('DOMContentLoaded', () => {
   m.route(document.body, '/', {
     '/': Auth(Home),
-    '/setup': Setup
+    '/setup': Setup,
+    '/privacy': Privacy,
+    '/terms': Terms
   })
 });
 

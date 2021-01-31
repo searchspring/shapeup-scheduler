@@ -6,7 +6,9 @@ module.exports = {
     view() {
         return <Layout>
             <div style="width:80%" class="mx-auto bg-white mb-4 mt-4 p-4 rounded-lg shadow">
-                <div class="text-2xl">Setup</div>
+                <div class="text-2xl">Scheduler - What data do we need?</div>
+                <p>This application connects to two spreadsheets that you create.  It uses this data to create a list of humans and a list of bets to allow you to put the humans on to bets.</p>
+                <p>The following steps show you what each of the spreadsheets should contain.</p>
                 <div class="flex">
                     <div class="flex-1">
                         <div class="block bg-gray-300 rounded-full text-xl bold pl-4 mb-2 mt-8">Step 1 - Humans</div>

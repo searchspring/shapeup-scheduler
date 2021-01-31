@@ -4,6 +4,7 @@ const Setup = require('./setup')
 
 const Bets = {
     list: [],
+    selectedTeam: null,
     loadList() {
         Bets.list = jsonstore.get('bets.list', [])
     },
@@ -12,12 +13,28 @@ const Bets = {
     },
     addSelected: (selected, bet) => {
         selected.map((name) => {
-            bet.people.push(name)
+            if (!Bets.hasPerson(bet, name)) {
+                bet.people.push(name)
+            }
         })
         Bets.save()
     },
+    hasPerson(bet, name) {
+        let foundOne = false
+        bet.people.map((person) => {
+            if (person === name) {
+                foundOne = true
+            }
+        })
+        return foundOne
+    },
     removePerson: (name, bet) => {
+        let foundOne = false
         bet.people = bet.people.filter((tofilter) => {
+            if (foundOne) {
+                return true
+            }
+            foundOne = tofilter === name
             return tofilter !== name
         })
         Bets.save()
@@ -69,7 +86,7 @@ const Bets = {
 
                 newList.push({
                     name: name,
-                    id: name, 
+                    id: name,
                     team: team,
                     daysRequired: size,
                     people: []
@@ -80,13 +97,6 @@ const Bets = {
                 let aSort = a.team.toLowerCase() + a.name.toLowerCase()
                 let bSort = b.team.toLowerCase() + b.name.toLowerCase()
                 return aSort.localeCompare(bSort)
-            })
-            // separator 
-            newList.push({
-                name: '',
-                team: 'BUG HERO',
-                daysRequired: 30,
-                people: []
             })
 
             for (let t in teams) {

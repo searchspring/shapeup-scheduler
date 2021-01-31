@@ -28,8 +28,8 @@ module.exports = {
                     }
                 }
             },
-                m(`.shadow.w-full.bg-gray-300.rounded-full`,
-                    m(`.${bg}.text-xs.leading-none.px-2.py-1.rounded-full`,
+                m(`.hover:opacity-75.shadow.w-full.bg-gray-300.rounded-full`,
+                    m(`.${bg}.text-xs.leading-none.px-2.py-1.rounded-full.select-none`,
                         { style: { width: w + '%' } }, person.name + ` (${personDaysAvailable})` 
                     )))
         } else {

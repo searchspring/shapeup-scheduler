@@ -36,7 +36,7 @@ module.exports = {
                 <div class="block bg-gray-300 rounded-full text-xl bold pl-4 mb-2 mt-8">Step 3 - Hit go</div>
                 <div class="mb-8 text-center">
                     {Setup.isSetup() ?
-                        <a class="focus:bg-blue-600 focus:outline-none w-64 mt-8 text-center hover:bg-blue-600 bg-blue-500 text-blue-100 px-4 py-2 rounded-full inline-block"
+                        <a class="focus:bg-blue-600 shadow hover:shadow-lg focus:outline-none w-64 mt-8 text-center hover:bg-blue-600 bg-blue-500 text-blue-100 px-4 py-2 rounded-full inline-block"
                             href="javascript:;" onclick={this.go}>Go</a>
                         : 'You must enter URLs to continue'}
 

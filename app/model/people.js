@@ -23,6 +23,15 @@ const People = {
     hasSelectedPerson() {
         return People.selected.length > 0 
     },
+    isSelected(name) {
+        let isSelected = false 
+        People.selected.map((person)=>{
+            if (person === name) {
+                isSelected = true
+            }
+        })  
+        return isSelected
+    },
     sync: (cb) => {
         let sheetId = Setup.getUserSheetId()
         if (!sheetId || sheetId === '') {

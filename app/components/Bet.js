@@ -9,14 +9,14 @@ module.exports = {
             let hasPeople = bet.people.length > 0
             let hasAtLeast2 = bet.people.length > 1
             let peopleBar = m('.flex.space-x-1.mt-1', bet.people.map((name) => {
-                return m('.flex-1.hover:bg-gray-300.cursor-pointer.rounded-full.bg-gray-400.text-xs.leading-none.py-1.text-center.text-white', {
+                return m(`.flex-1.hover:bg-gray-300.cursor-pointer.rounded-full.bg-gray-400.text-xs.leading-none.py-1.text-center.text-white${People.isSelected(name) ? '.bg-yellow-300': ''}`, {
                     onclick: (e) => {
                         e.stopPropagation()
                         Bets.removePerson(name, bet)
                     },
                     style: { width: '100%' }
                 },
-                    m('.select-none', name)
+                    m(`.select-none`, name)
                 )
             }))
             let w = parseInt(bet.daysRequired / 30 * 100)
@@ -24,7 +24,7 @@ module.exports = {
                 `${People.hasSelectedPerson() ? 'hover:bg-gray-200 cursor-pointer' : ''} ` +
                 `${hasPeople ? 'bg-gray-100' : ''}`
             let betSelectedClass = `w-full border-solid border rounded-lg px-2 py-1 ` +
-                `${Bets.selectedTeam === bet.team ? 'bg-yellow-200' : ''}`
+                `${Bets.selectedTeam && Bets.selectedTeam.toLowerCase() === bet.team.toLowerCase() ? 'bg-yellow-200' : ''}`
             return <div class={betClass} style={`width: ${w}%`} onclick={() => { Bets.addSelected(People.selected, bet) }}>
                 <div class={betSelectedClass}>
                     <div>

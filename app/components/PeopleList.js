@@ -16,7 +16,7 @@ module.exports = {
         let peopleList = People.list.map((person) => {
             let teamTitle = null
             if (lastTeam !== person.team) {
-                teamTitle = m('.text-sm.select-none', {
+                teamTitle = m('.text-sm.select-none.mt-2', {
                     onmouseover: () => {
                         Bets.selectedTeam = person.team
                     },
@@ -26,11 +26,11 @@ module.exports = {
                 }, person.team)
             }
             lastTeam = person.team
-            return m('.mb-2', [teamTitle, m(Person, { person: person, daysAvailable: vnode.attrs.daysAvailable })])
+            return [teamTitle, m(Person, { person: person, daysAvailable: vnode.attrs.daysAvailable })]
         })
         return <div>
             <div class="flex">
-                <div class="flex-1 mb-4 select-none">Humans</div>
+                <div class="flex-1 mb-2 select-none">Humans</div>
                 <div class="hover:text-blue-700 select-none flex-initial float-right text-xs text-blue-500 underline cursor-pointer"
                     onclick={() => {
                         vnode.state.loading = true

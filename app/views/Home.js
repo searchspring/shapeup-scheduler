@@ -1,5 +1,6 @@
 const m = require('mithril')
 const BetsList = require('../components/BetsList')
+const GanntChart = require('../components/GanntChart')
 const PeopleList = require('../components/PeopleList')
 const Bets = require('../model/bets')
 const People = require('../model/people')

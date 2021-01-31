@@ -19,7 +19,7 @@ module.exports = {
                     m(`.select-none`, name)
                 )
             }))
-            let w = parseInt(bet.daysRequired / 30 * 100)
+            let w = parseInt(bet.daysRequired / 30 * 98)
             let betClass = `select-none rounded-lg inline-block mb-1 align-top mr-1 shadow-sm ` +
                 `${People.hasSelectedPerson() ? 'hover:bg-gray-200 cursor-pointer' : ''} ` +
                 `${hasPeople ? 'bg-gray-100' : ''}`

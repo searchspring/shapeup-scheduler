@@ -1,6 +1,5 @@
 require("@babel/polyfill")
 const m = require('mithril')
-const jsonstore = require("./utils/jsonstore")
 
 const Home = require('./views/Home')
 const Setup = require('./views/Setup')

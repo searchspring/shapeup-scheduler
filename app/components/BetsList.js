@@ -12,8 +12,8 @@ module.exports = {
     },
     view: function (vnode) {
         if (Bets.list) {
-            let betList = Bets.list.map((bet) => {
-                return <Bet daysAvailable={vnode.attrs.daysAvailable} bet={bet} />
+            let betList = Bets.list.map((bet, i) => {
+                return <Bet daysAvailable={vnode.attrs.daysAvailable} bet={bet} i={i} />
             })
             return <div>
                 <div class="flex">

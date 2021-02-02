@@ -1,5 +1,6 @@
 const m = require('mithril')
 const jsonstore = require('../utils/jsonstore')
+const People = require('./people')
 const Setup = require('./setup')
 
 const Bets = {
@@ -76,10 +77,11 @@ const Bets = {
 
         gapi.client.sheets.spreadsheets.values.get(params).then(function (response) {
             let newList = []
-            let teams = {}
+            let teams = People.getTeams()
+
             response.result.values.map((task) => {
                 let team = task[2]
-                teams[team] = true
+                teams[team.toLowerCase()] = true
                 let sizeName = task[1].toLowerCase().trim()
                 let name = task[0]
                 let size = sizeName === 'large' ? 30 : sizeName === 'medium' ? 20 : 10

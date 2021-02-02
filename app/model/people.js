@@ -21,16 +21,25 @@ const People = {
         People.save()
     },
     hasSelectedPerson() {
-        return People.selected.length > 0 
+        return People.selected.length > 0
     },
     isSelected(name) {
-        let isSelected = false 
-        People.selected.map((person)=>{
+        let isSelected = false
+        People.selected.map((person) => {
             if (person === name) {
                 isSelected = true
             }
-        })  
+        })
         return isSelected
+    },
+    getTeams() {
+        let teams = {}
+        if (People.list) {
+            People.list.map((person) => {
+                teams[person.team.toLowerCase()] = true
+            })
+        }
+        return teams
     },
     sync: (cb) => {
         let sheetId = Setup.getUserSheetId()

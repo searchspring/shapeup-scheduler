@@ -31,7 +31,7 @@ module.exports = {
                     <div>
                         <div class="text-xs clearfix">
                             {hasAtLeast2 ? <img class="float-right inline-block h-4" src="images/check.png" /> : null}
-                            <span class="text-gray-400 mr-1 float-right">{bet.team}</span>
+                            <span class="text-gray-500 mr-1 float-right">{bet.team.toLowerCase()}</span>
                             <span class="text-sm">{bet.name}</span>
                         </div>
                     </div>

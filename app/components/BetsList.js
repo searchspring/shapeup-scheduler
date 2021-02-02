@@ -12,7 +12,16 @@ module.exports = {
     },
     view: function (vnode) {
         if (Bets.list) {
-            let betList = Bets.list.map((bet, i) => {
+            let firstBugHero = true
+
+            let betList = Bets.list.filter((bet) => {
+                return bet.name.toLowerCase().indexOf('bug hero') === -1
+            }).map((bet, i) => {
+                return <Bet daysAvailable={vnode.attrs.daysAvailable} bet={bet} i={i} />
+            })
+            let bugHeroList = Bets.list.filter((bet) => {
+                return bet.name.toLowerCase().indexOf('bug hero') !== -1
+            }).map((bet, i) => {
                 return <Bet daysAvailable={vnode.attrs.daysAvailable} bet={bet} i={i} />
             })
             return <div>
@@ -37,6 +46,10 @@ module.exports = {
                     </div>
                 </div>
                 {betList}
+                {Setup.useBugHero ?
+                    <div class="mt-4">
+                        {bugHeroList}
+                    </div> : null}
             </div>
         }
     }

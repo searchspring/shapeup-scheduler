@@ -98,13 +98,7 @@ const Bets = {
                 let bSort = b.team.toLowerCase() + b.name.toLowerCase()
                 return aSort.localeCompare(bSort)
             })
-            newList.push({
-                team: '',
-                name: '',
-                id: 'separator',
-                daysRequired: 30,
-                people: []
-            })
+            
             for (let t in teams) {
                 for (let i = 0; i < 6; i++) {
                     newList.push({

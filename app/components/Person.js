@@ -15,23 +15,26 @@ module.exports = {
             } else {
                 bg = 'bg-gray-300'
             }
-            w = 100
+            w = Math.abs(w)
+            w = w > 100 ? 100 : w
         }
         if (person) {
-            return m(`.cursor-pointer.w-full.rounded-full.${vnode.state.selected ? 'border-solid.border.border-blue-800' : 'border-solid.border.border-white'}`, {
-                onclick: () => {
+            let classProgressBar = `rounded-full top-0 absolute px-2 ${bg}`
+            let classBackgroundBar = 'px-2 rounded-full bg-gray-300'
+            let classMain = 'hover:opacity-75 select-none text-xs relative cursor-pointer rounded-full ' + (vnode.state.selected ? 'border-solid border border-blue-800' : 'border-solid border border-white')
+            return <div class={classMain}
+                onclick={() => {
                     vnode.state.selected = !vnode.state.selected
                     if (vnode.state.selected) {
                         People.selectPerson(person)
                     } else {
                         People.deselectPerson(person)
                     }
-                }
-            },
-                m(`.hover:opacity-75.shadow.w-full.bg-gray-300.rounded-full`,
-                    m(`.${bg}.text-xs.leading-none.px-2.py-1.rounded-full.select-none`,
-                        { style: { width: w + '%' } }, person.name + ` (${personDaysAvailable})` 
-                    )))
+                }}>
+                <div class={classBackgroundBar}>&nbsp;</div>
+                <div class={classProgressBar} style={'width: ' + w + '%'}>&nbsp;</div>
+                <div class="top-0 absolute px-2 hover:opacity-75">{person.name} ({personDaysAvailable})</div>
+            </div>
         } else {
             return m('', 'no person set')
         }

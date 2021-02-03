@@ -43,10 +43,10 @@ module.exports = {
                 <div class="mb-8 ">
                     <div class="p-4">
                         <label for="bughero" class="cursor-pointer">
-                            <input id="bughero" type="checkbox"
+                            <input id="bughero" type="checkbox" class="mr-2 double"
                                 checked={Setup.useBugHero}
                                 onclick={() => { Setup.setUseBugHero(!Setup.useBugHero) }} />
-                                Show Generated Bug Hero Teams
+                                 Show Generated Bug Hero Teams
                         </label>
                         <p class="text-gray-800">Show the bug hero team as bets in the scheduler.
                         Bug Hero is a team responsible for shielding the bet teams from interruptions that require engineering attention.

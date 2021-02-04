@@ -7,6 +7,7 @@ const Bet = require('./Bet')
 
 module.exports = {
     loading: false,
+    onlyFilled: false,
     oninit: function () {
         user.signIn()
     },
@@ -15,11 +16,17 @@ module.exports = {
             let firstBugHero = true
 
             let betList = Bets.list.filter((bet) => {
+                if (bet.people.length === 0 && this.onlyFilled) {
+                    return false
+                }
                 return bet.name.toLowerCase().indexOf('bug hero') === -1
             }).map((bet, i) => {
                 return <Bet daysAvailable={vnode.attrs.daysAvailable} bet={bet} i={i} />
             })
             let bugHeroList = Bets.list.filter((bet) => {
+                if (bet.people.length === 0 && this.onlyFilled) {
+                    return false
+                }
                 return bet.name.toLowerCase().indexOf('bug hero') !== -1
             }).map((bet, i) => {
                 return <Bet daysAvailable={vnode.attrs.daysAvailable} bet={bet} i={i} />
@@ -27,6 +34,13 @@ module.exports = {
             return <div>
                 <div class="flex">
                     <div class="flex-1 mb-4 select-none">Bets</div>
+
+                    <div class="hover:text-blue-700 select-none flex-initial text-right text-xs mr-8 text-blue-500 underline cursor-pointer"
+                        onclick={() => {
+                            this.onlyFilled = !this.onlyFilled
+                        }}>
+                        toggle filled
+                        </div>
                     <div class="hover:text-blue-700 select-none flex-initial text-right text-xs text-blue-500 underline cursor-pointer"
                         onclick={() => {
                             vnode.state.loading = true
